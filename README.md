@@ -1,8 +1,4 @@
-<p align="center">
-  <img src="assets/banner.svg" alt="Inside Claude Code" width="800"/>
-</p>
-
-<h1 align="center">Inside Claude Code</h1>
+<h1 align="center">🔍 Inside Claude Code</h1>
 
 <p align="center">
   <strong>Architecture Deep Dive &bull; Flow Diagrams &bull; How Every Feature Works Under the Hood</strong>
