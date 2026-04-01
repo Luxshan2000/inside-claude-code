@@ -117,22 +117,22 @@ Session: abc123-def456
 
 ---
 
-## Command Registration — Class Diagram
+## Command Registry — Concept Diagram
 
 ```mermaid
 classDiagram
     class SlashCommand {
-        +name: String
-        +description: String
-        +usage: String
-        +requires_session: bool
+        +name
+        +description
+        +usage example
+        +needs active session?
     }
 
     class CommandRegistry {
-        +commands: Vec~SlashCommand~
-        +get(name) Option~SlashCommand~
-        +list() Vec~SlashCommand~
-        +list_filtered(has_session) Vec~SlashCommand~
+        +all commands
+        +find by name
+        +list all
+        +list filtered by context
     }
 
     CommandRegistry *-- SlashCommand

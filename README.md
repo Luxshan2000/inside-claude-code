@@ -165,18 +165,18 @@ graph LR
 
 ---
 
-## 📊 System Stats
+## 📊 System at a Glance
 
 | Component | Details |
 |-----------|---------|
-| **Crate Architecture** | 6 Rust crates (api, commands, compat-harness, runtime, cli, tools) |
-| **Built-in Tools** | 18 tools (bash, read, write, edit, glob, grep, web_search, web_fetch, agent, etc.) |
-| **MCP Transports** | 6 types (stdio, SSE, HTTP, WebSocket, SDK, Claude.ai proxy) |
-| **Permission Tiers** | 3 levels (ReadOnly, WorkspaceWrite, DangerFullAccess) |
-| **Config Sources** | 5 locations (user home, user .claude/, project root, project .claude/, local) |
-| **Slash Commands** | 15+ (/help, /compact, /model, /permissions, /cost, /diff, etc.) |
+| **Modular Architecture** | Separate modules for API, commands, runtime core, CLI, and tools |
+| **Built-in Tools** | 18 tools — file ops, shell, search, web, orchestration |
+| **MCP Transports** | 6 types — stdio, SSE, HTTP, WebSocket, SDK, proxy |
+| **Permission Tiers** | 3 levels — ReadOnly, WorkspaceWrite, DangerFullAccess |
+| **Config Sources** | 5 locations — user, project, local, CLI flags, env vars |
+| **Slash Commands** | 15+ — /compact, /model, /permissions, /cost, /diff, and more |
 | **Bootstrap Phases** | 12 ordered startup phases |
-| **Supported Models** | Opus 4.6, Sonnet 4.5, Haiku 4.5 |
+| **Supported Models** | Opus, Sonnet, Haiku model families |
 
 ---
 

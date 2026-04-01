@@ -207,17 +207,17 @@ Config:
 
 ---
 
-## MCP Bootstrap Data
+## MCP Server Bootstrap Data
 
 ```
 ┌────────────────────────────────────────────────┐
-│ McpClientBootstrap                             │
+│ MCP Server Bootstrap                           │
 ├────────────────────────────────────────────────┤
-│ normalized_name: String  ("my_github_server")  │
-│ tool_prefix: String      ("mcp__my_github_..") │
-│ signature: String        (hash for dedup)      │
-│ transport: TransportType (Stdio/SSE/WS/...)    │
-│ scope: ConfigSource      (User/Project/Local)  │
+│ Normalized Name   (e.g., "my_github_server")   │
+│ Tool Prefix       (e.g., "mcp__my_github_..")  │
+│ Signature         (hash for deduplication)      │
+│ Transport Type    (Stdio/SSE/WS/...)           │
+│ Config Scope      (User/Project/Local)          │
 └────────────────────────────────────────────────┘
 ```
 

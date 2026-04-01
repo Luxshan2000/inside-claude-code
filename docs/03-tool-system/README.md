@@ -149,41 +149,37 @@ Every tool defines its input as a JSON Schema:
 
 ---
 
-## ToolExecutor — Registration Pattern
+## Tool Executor — Registration Pattern
 
 ```mermaid
 classDiagram
     class ToolExecutor {
-        <<trait>>
-        +execute(tool_name, input) Result~String, ToolError~
+        <<interface>>
+        +execute(tool_name, input) Result
     }
 
-    class StaticToolExecutor {
-        -handlers: BTreeMap~String, Handler~
+    class ToolRegistry {
+        -handlers: Map of name → handler
         +register(name, handler) Self
         +execute(tool_name, input) Result
     }
 
-    class Handler {
-        <<type alias>>
-        Box~dyn FnMut(input) → Result~
-    }
-
-    ToolExecutor <|.. StaticToolExecutor
-    StaticToolExecutor *-- Handler
+    ToolExecutor <|.. ToolRegistry
 ```
 
 ### Builder Pattern
 
+Tools are registered one-by-one using a builder pattern:
+
 ```
-StaticToolExecutor::new()
-    .register("bash", handle_bash)
-    .register("read_file", handle_read)
-    .register("write_file", handle_write)
-    .register("edit_file", handle_edit)
-    .register("glob_search", handle_glob)
-    .register("grep_search", handle_grep)
-    // ... 12 more tools
+ToolRegistry
+    .register("bash", bash_handler)
+    .register("read_file", read_handler)
+    .register("write_file", write_handler)
+    .register("edit_file", edit_handler)
+    .register("glob_search", glob_handler)
+    .register("grep_search", grep_handler)
+    ... and 12 more tools
 ```
 
 ---

@@ -98,31 +98,31 @@ sequenceDiagram
 
 ## Key Data Structures
 
-### AssistantEvent — What the API sends
+### Assistant Event — What the API sends
 
 ```
 ┌─────────────────────────────────────────┐
-│ AssistantEvent (enum)                   │
+│ Assistant Event Types                   │
 ├─────────────────────────────────────────┤
-│ TextDelta(String)     → Text chunk      │
-│ ToolUse { id, name,                     │
-│           input }     → Tool invocation │
-│ Usage(TokenUsage)     → Token counts    │
-│ MessageStop           → End of turn     │
+│ Text Delta      → Incremental text      │
+│ Tool Use        → Tool invocation       │
+│                   (id, name, input)      │
+│ Usage           → Token count update    │
+│ Message Stop    → End of response       │
 └─────────────────────────────────────────┘
 ```
 
-### TurnSummary — What each iteration produces
+### Turn Summary — What each iteration produces
 
 ```
 ┌─────────────────────────────────────────┐
-│ TurnSummary                             │
+│ Turn Summary                            │
 ├─────────────────────────────────────────┤
-│ assistant_messages: Vec<Message>        │
-│ tool_results: Vec<ToolResult>           │
-│ iterations: u32                         │
-│ usage: TokenUsage                       │
-│ auto_compaction: bool                   │
+│ Assistant messages sent                 │
+│ Tool results collected                  │
+│ Number of iterations                    │
+│ Token usage stats                       │
+│ Whether auto-compaction triggered       │
 └─────────────────────────────────────────┘
 ```
 

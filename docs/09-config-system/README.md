@@ -83,7 +83,7 @@ graph LR
 
 ---
 
-## ConfigSource Scoping
+## Config Scoping
 
 ```mermaid
 classDiagram
@@ -95,25 +95,25 @@ classDiagram
     }
 
     class ConfigEntry {
-        +source: ConfigSource
-        +path: PathBuf
-        +data: BTreeMap
+        +source
+        +file path
+        +settings data
     }
 
     class ConfigLoader {
-        +discover() Vec~ConfigEntry~
-        +load() RuntimeConfig
+        +discover all config files
+        +load and merge
     }
 
     class RuntimeConfig {
-        +merged: BTreeMap
-        +entries: Vec~ConfigEntry~
-        +hooks() HookConfig
-        +mcp_servers() McpConfig
-        +oauth() OAuthConfig
-        +model() String
-        +permissions() PermissionConfig
-        +sandbox() SandboxConfig
+        +merged settings
+        +config entries
+        +get hooks
+        +get MCP servers
+        +get auth settings
+        +get model
+        +get permissions
+        +get sandbox settings
     }
 
     ConfigLoader --> ConfigEntry
@@ -125,18 +125,18 @@ classDiagram
 
 ## Feature Extraction
 
-The RuntimeConfig provides typed accessors for each feature:
+The runtime config provides typed accessors for each feature area:
 
 ```
 ┌───────────────────────────────────────────────────┐
-│ RuntimeConfig                                     │
+│ Runtime Configuration Accessors                   │
 ├───────────────────────────────────────────────────┤
-│ .hooks()         → RuntimeHookConfig              │
-│ .mcp_servers()   → HashMap<String, McpServerConfig>│
-│ .oauth()         → OAuthConfig                    │
-│ .model()         → String (e.g., "claude-opus-4-6")│
-│ .permissions()   → PermissionConfig               │
-│ .sandbox()       → SandboxConfig                  │
+│ Hooks         → Hook runner configuration         │
+│ MCP Servers   → Map of server name → server config│
+│ OAuth         → Authentication settings           │
+│ Model         → Which AI model to use             │
+│ Permissions   → Permission mode & policies        │
+│ Sandbox       → Execution isolation settings      │
 └───────────────────────────────────────────────────┘
 ```
 

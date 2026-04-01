@@ -63,14 +63,14 @@ graph TD
 ```mermaid
 classDiagram
     class SandboxConfig {
-        +enabled: bool
-        +namespace_restrictions: bool
-        +network_isolation: bool
-        +filesystem_mode: FilesystemIsolationMode
-        +allowed_mounts: Vec~String~
+        +enabled (yes/no)
+        +namespace restrictions
+        +network isolation
+        +filesystem mode
+        +allowed mount paths
     }
 
-    class FilesystemIsolationMode {
+    class FilesystemMode {
         <<enumeration>>
         Off
         WorkspaceOnly
@@ -78,13 +78,13 @@ classDiagram
     }
 
     class SandboxStatus {
-        +active: bool
-        +filesystem_mode: FilesystemIsolationMode
-        +network_isolated: bool
-        +reason_inactive: Option~String~
+        +is active
+        +filesystem mode
+        +network isolated
+        +reason if inactive
     }
 
-    SandboxConfig --> FilesystemIsolationMode
+    SandboxConfig --> FilesystemMode
     SandboxConfig ..> SandboxStatus
 ```
 

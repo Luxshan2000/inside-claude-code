@@ -113,15 +113,15 @@ sequenceDiagram
 
 ---
 
-## PermissionPolicy — Class Diagram
+## Permission Engine — Class Diagram
 
 ```mermaid
 classDiagram
-    class PermissionPolicy {
+    class PermissionEngine {
         -active_mode: PermissionMode
-        -tool_requirements: BTreeMap~String, PermissionMode~
-        -prompter: Option~PermissionPrompter~
-        +check(tool_name, input) PermissionDecision
+        -tool_requirements: Map of tool → required mode
+        -prompter: Optional interactive prompter
+        +check(tool_name, input) Decision
     }
 
     class PermissionMode {
@@ -134,21 +134,21 @@ classDiagram
     }
 
     class PermissionRequest {
-        +tool_name: String
-        +tool_input: String
-        +current_mode: PermissionMode
-        +required_mode: PermissionMode
+        +tool_name
+        +tool_input
+        +current_mode
+        +required_mode
     }
 
-    class PermissionDecision {
+    class Decision {
         <<enumeration>>
         Allow
-        Deny(reason: String)
+        Deny with reason
     }
 
-    PermissionPolicy --> PermissionMode
-    PermissionPolicy ..> PermissionRequest
-    PermissionPolicy ..> PermissionDecision
+    PermissionEngine --> PermissionMode
+    PermissionEngine ..> PermissionRequest
+    PermissionEngine ..> Decision
 ```
 
 ---

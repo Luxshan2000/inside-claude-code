@@ -10,15 +10,15 @@
 
 ```mermaid
 graph TB
-    subgraph "LiveCli (main.rs — 3,900 lines)"
-        INPUT["Input Handler<br/>(rustyline + completion)"]
+    subgraph "CLI Core"
+        INPUT["Input Handler<br/>(line reader + completion)"]
         COMMANDS["Command Dispatcher<br/>(slash commands)"]
         STREAM["Stream Display<br/>(real-time token rendering)"]
-        TOOLS_UI["Tool UI<br/>(box borders, spinner)"]
+        TOOLS_UI["Tool Call UI<br/>(box borders, spinner)"]
         PERM_UI["Permission Prompter<br/>(Y/N for escalation)"]
     end
 
-    subgraph "Renderer (render.rs)"
+    subgraph "Terminal Renderer"
         MD["Markdown Parser"]
         SYNTAX["Syntax Highlighter"]
         SPINNER["Spinner Widget"]
@@ -26,8 +26,8 @@ graph TB
     end
 
     subgraph "External"
-        RT["Runtime"]
-        TERM["Terminal (stdout)"]
+        RT["Runtime Core"]
+        TERM["Terminal Output"]
     end
 
     INPUT --> COMMANDS

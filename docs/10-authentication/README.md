@@ -93,16 +93,16 @@ sequenceDiagram
 
 ```
 ┌──────────────────────────────────────────┐
-│ TokenSet                                 │
+│ Token Set                                │
 ├──────────────────────────────────────────┤
-│ access_token: String                     │
-│ refresh_token: Option<String>            │
-│ expires_at: Option<DateTime>             │
-│ scopes: Vec<String>                      │
+│ Access Token                             │
+│ Refresh Token (optional)                 │
+│ Expiration Time (optional)               │
+│ Granted Scopes                           │
 ├──────────────────────────────────────────┤
 │ Storage: ~/.claude/credentials/<hash>    │
 │ Hash: SHA256 of client config            │
-│ Permissions: 0600 (owner read/write)     │
+│ File permissions: owner read/write only  │
 └──────────────────────────────────────────┘
 ```
 

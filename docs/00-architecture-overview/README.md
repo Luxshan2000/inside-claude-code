@@ -49,26 +49,24 @@ graph TB
 
 ---
 
-## Crate Dependency Graph
+## Module Dependency Graph
 
 ```mermaid
 graph LR
-    CLI["rusty-claude-cli"] --> RT["runtime"]
-    CLI --> CMDS["commands"]
-    CLI --> TOOLS["tools"]
-    RT --> API["api"]
+    CLI["CLI Interface"] --> RT["Runtime Core"]
+    CLI --> CMDS["Commands"]
+    CLI --> TOOLS["Tools"]
+    RT --> API["API Client"]
     RT --> TOOLS
-    COMPAT["compat-harness"] -.-> RT
 ```
 
-| Crate | Lines | Purpose |
-|-------|-------|---------|
-| `api` | ~1,500 | HTTP client, SSE parser, auth, retry |
-| `commands` | ~470 | Slash command registry & metadata |
-| `compat-harness` | ~200 | TypeScript manifest extraction for parity |
-| `runtime` | ~5,300 | **Core** — conversation loop, config, permissions, MCP, sessions |
-| `rusty-claude-cli` | ~3,900 | CLI binary, REPL, markdown rendering |
-| `tools` | ~4,240 | Built-in tool specifications & execution |
+| Module | Purpose |
+|--------|---------|
+| **API Client** | HTTP communication, SSE streaming, auth, retry |
+| **Commands** | Slash command registry & metadata |
+| **Runtime Core** | Conversation loop, config, permissions, MCP, sessions |
+| **CLI Interface** | Terminal REPL, markdown rendering, input handling |
+| **Tools** | Built-in tool specifications & execution |
 
 ---
 
@@ -130,7 +128,7 @@ The system automatically discovers project context — `CLAUDE.md` files, git st
 Tools are pluggable. Built-in tools handle common operations, MCP servers extend capabilities, and hooks wrap everything with custom logic.
 
 ### 5. Memory-Safe
-The Rust implementation uses `#![forbid(unsafe_code)]` — zero unsafe blocks. Memory management is handled entirely by Rust's ownership system.
+The implementation enforces strict memory safety — no unsafe operations allowed. Memory management is handled by the language's ownership system.
 
 ---
 
@@ -138,21 +136,21 @@ The Rust implementation uses `#![forbid(unsafe_code)]` — zero unsafe blocks. M
 
 ```mermaid
 graph TB
-    subgraph "runtime crate"
-        CONV["conversation.rs<br/>Agentic Loop"]
-        CONFIG["config.rs<br/>Config Loading"]
-        PERM["permissions.rs<br/>Authorization"]
-        HOOKS["hooks.rs<br/>Hook Runner"]
-        PROMPT["prompt.rs<br/>System Prompt"]
-        SESSION["session.rs<br/>Persistence"]
-        MCP["mcp.rs<br/>MCP Protocol"]
-        COMPACT["compact.rs<br/>Compaction"]
-        OAUTH["oauth.rs<br/>OAuth PKCE"]
-        USAGE["usage.rs<br/>Cost Tracking"]
-        SANDBOX["sandbox.rs<br/>Isolation"]
-        BASH["bash.rs<br/>Shell Exec"]
-        BOOT["bootstrap.rs<br/>Startup"]
-        REMOTE["remote.rs<br/>Proxy Support"]
+    subgraph "Runtime Core"
+        CONV["Conversation Engine<br/>Agentic Loop"]
+        CONFIG["Configuration Loader"]
+        PERM["Permission Engine"]
+        HOOKS["Hook Runner"]
+        PROMPT["System Prompt Builder"]
+        SESSION["Session Manager"]
+        MCP["MCP Protocol Client"]
+        COMPACT["Context Compactor"]
+        OAUTH["OAuth Handler"]
+        USAGE["Usage & Cost Tracker"]
+        SANDBOX["Sandbox Manager"]
+        BASH["Shell Executor"]
+        BOOT["Bootstrap Orchestrator"]
+        REMOTE["Remote Proxy"]
     end
 
     CONV --> CONFIG

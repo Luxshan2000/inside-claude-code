@@ -17,16 +17,16 @@ Coding tasks often span multiple sittings. You might start debugging in the morn
 ```mermaid
 classDiagram
     class Session {
-        +version: u32
-        +messages: Vec~ConversationMessage~
-        +save_to_path(path)
-        +load_from_path(path) Session
+        +version
+        +messages list
+        +save(path)
+        +load(path)
     }
 
-    class ConversationMessage {
-        +role: Role
-        +blocks: Vec~ContentBlock~
-        +usage: Option~TokenUsage~
+    class Message {
+        +role
+        +content blocks
+        +token usage (optional)
     }
 
     class Role {
@@ -39,22 +39,22 @@ classDiagram
 
     class ContentBlock {
         <<enumeration>>
-        Text(text: String)
-        ToolUse(id, name, input)
-        ToolResult(tool_use_id, tool_name, output, is_error)
+        Text
+        Tool Use (id, name, input)
+        Tool Result (id, output, is_error)
     }
 
     class TokenUsage {
-        +input: u32
-        +output: u32
-        +cache_creation: u32
-        +cache_read: u32
+        +input tokens
+        +output tokens
+        +cache creation tokens
+        +cache read tokens
     }
 
-    Session *-- ConversationMessage
-    ConversationMessage --> Role
-    ConversationMessage *-- ContentBlock
-    ConversationMessage --> TokenUsage
+    Session *-- Message
+    Message --> Role
+    Message *-- ContentBlock
+    Message --> TokenUsage
 ```
 
 ---

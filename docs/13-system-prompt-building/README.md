@@ -61,33 +61,33 @@ flowchart TD
 
 ---
 
-## ProjectContext — What Gets Injected
+## Project Context — What Gets Injected
 
 ```mermaid
 classDiagram
     class ProjectContext {
-        +cwd: PathBuf
-        +current_date: String
-        +git_status: Option~String~
-        +git_diff: Option~String~
-        +instruction_files: Vec~InstructionFile~
+        +working directory
+        +current date
+        +git status (optional)
+        +git diff (optional)
+        +instruction files
     }
 
     class InstructionFile {
-        +path: PathBuf
-        +content: String
-        +truncated: bool
+        +file path
+        +content
+        +was truncated?
     }
 
-    class SystemPromptBuilder {
-        +base_prompt: String
-        +with_project_context(ctx) Self
-        +with_os_info() Self
-        +build() String
+    class PromptBuilder {
+        +base prompt text
+        +add project context
+        +add OS info
+        +build final prompt
     }
 
     ProjectContext *-- InstructionFile
-    SystemPromptBuilder --> ProjectContext
+    PromptBuilder --> ProjectContext
 ```
 
 ---
